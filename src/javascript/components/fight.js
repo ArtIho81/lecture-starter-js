@@ -1,19 +1,30 @@
-import controls from '../../constants/controls';
+// import controls from '../../constants/controls';
 
-export async function fight(firstFighter, secondFighter) {
-    return new Promise(resolve => {
-        // resolve the promise with the winner when fight is over
-    });
+function getRandomNumber() {
+    return Math.random() + 1;
 }
 
-export function getDamage(attacker, defender) {
-    // return damage
+// function getCriticalHitDamage(fighter) {
+//     return 2 * fighter.attack;
+// }
+
+export function getBlockPower(fighter) {
+    const dodgeChance = getRandomNumber();
+    return fighter.defense * dodgeChance;
 }
 
 export function getHitPower(fighter) {
-    // return hit power
+    const criticalHitChance = getRandomNumber();
+    return fighter.attack * criticalHitChance;
 }
 
-export function getBlockPower(fighter) {
-    // return block power
+export function getDamage(attacker, defender) {
+    const damage = getHitPower(attacker) - getBlockPower(defender);
+    return damage > 0 ? damage : 0;
 }
+
+// export async function fight(firstFighter, secondFighter) {
+// return new Promise(resolve => {
+//     // resolve the promise with the winner when fight is over
+// });
+// }
